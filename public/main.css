@@ -1,0 +1,55 @@
+@import url('https://fonts.googleapis.com/css?family=Pacifico|Cookie|Rambla');
+
+.title{
+  color: #FFC400;
+  font-family: Pacifico;
+  font-size: 2em;
+}
+
+body{
+  font-family: Rambla;  
+  background-color: ;
+  font-size: 20px;
+}
+
+.margin-top{
+  margin-top: 2%;
+}
+
+.section1{
+  background-color: #EEFF41;
+  padding: 40px;
+  border-radius: 10px;
+}
+
+.section2{
+  background-color: #C6FF00;
+  padding: 40px;
+  border-radius: 10px;
+}
+
+.section3{
+  background-color: #00B0FF;
+  padding: 40px;
+  border-radius: 10px;
+}
+
+.custom-padding{
+  padding: 20px;
+}
+
+.boxing{
+  text-align: center;
+  border-radius: 20px;
+  border: 2px solid black;
+  padding: 5px;
+}
+.custom-footer{
+  border-radius: 5px;
+  padding: 50px;
+  background-color: black;
+}
+
+.social{
+  color: red !important;
+}

@@ -126,23 +126,19 @@ html
                 .row.text-center(style='padding:20px')
                     ul.list-inline
                         li
-                            a.button.social(href='https://in.linkedin.com/in/ppmakeitcount', target='_blank')
+                            a.button.social(href='#{ profile.linkedin }', target='_blank')
                                 i.fa.fa-fw.fa-4x.fa-linkedin
                         |                     
                         li
-                            a.button.social(href='https://github.com/ppmakeitcount', target='_blank')
+                            a.button.social(href='#{ profile.github }', target='_blank')
                                 i.fa.fa-fw.fa-4x.fa-github
                         |                     
                         li
-                            a.button.social(href='https://www.freecodecamp.com/ppmakeitcount', target='_blank')
-                                i.fa.fa-fw.fa-4x.fa-free-code-camp(aria-hidden='true')
-                        |                     
-                        li
-                            a.button.social(href='https://twitter.com/ppmakeitcount', target='_blank')
+                            a.button.social(href='#{ profile.twitter }', target='_blank')
                                 i.fa.fa-fw.fa-4x.fa-twitter
                         |                     
                         li
-                            a.button.social(href='https://www.facebook.com/ppmakeitcount', target='_blank')
+                            a.button.social(href='#{ profile.facebook }', target='_blank')
                                 i.fa.fa-fw.fa-4x.fa-facebook
                     |                 
                     h6(style='color:#FF5252') #{profile.email}

@@ -1,6 +1,7 @@
 doctype html
 html
   head
+    title bulb! 
     meta(charset='utf-8')
     meta(http-equiv='X-UA-Compatible', content='IE=edge')
     meta(name='viewport', content='width=device-width, initial-scale=1')
@@ -12,12 +13,86 @@ html
     link(rel='stylesheet prefetch', href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css')
     link(rel='stylesheet prefetch', href='https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css')
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')
-    link(rel='stylesheet', href='style.css')
-    title Profile
-  body(style="background-color: #FAFAFA ;")
-    .container(style="margin-top:5%; padding:10px;")
-      if user
-          a.btn.btn-default(href='/logout')= user.account.username
-      else
-          a.btn.btn-default(href='/login') connect with google 
+    link(rel='stylesheet', href='./main.css')
+    link(rel='stylesheet', href='../main.css')
+  body
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
+    .alert.alert-info.alert-dismissible.text-center(role='alert')
+      button.close(type='button', data-dismiss='alert', aria-label='Close')
+        span(aria-hidden='true') ×
+      strong Beta ! 
+      |  we are in beta version ryt now!
+    if done
+      .alert.alert-success.alert-dismissible.text-center(role='alert')
+        button.close(type='button', data-dismiss='alert', aria-label='Close')
+          span(aria-hidden='true') ×
+        strong copy url= '#{ fullUrl }#{ user._id }' 
+    .container-fluid.margin-top
+      .row.text-center.margin-top
+        h1.title
+          | bulb 
+          i.fa.fa-5x.fa-lightbulb-o(aria-hidden='true')
+        h2(style='color: #FFA000; font-family:Cookie;') yeah!!! - Creating you own website is just a click away!
+        if user
+          a.btn.btn-lg.btn-default(href='/logout')= user.account.username
+            small  logout
+        else
+          a.btn.btn-lg.btn-default(href='/login') connect with google 
             i.fa.fa-google.fa-1x(aria-hidden='true')
+        a.btn.btn-lg.btn-danger(href='/profile')  Create Now! 
+    .container-fluid.margin-top
+      .row.center-block
+        .col-lg-8.pull-left.section1
+          | no time to sit and code html, css, jquery?
+          br
+          |  no sufficient funds to buy domain name and space?
+          br
+      .row.center-block.margin-top
+        .col-lg-8.pull-right.section2
+          | want to showcase all your projects at one place?
+          br
+          |  provide all your social contact links (linkedin, github etc) to viewers?
+          br
+      .row.center-block.margin-top
+        .col-lg-8.col-lg-offset-2.section3
+          h1  Not a problem! bulb is here for you.
+          blockquote
+            h3
+              | just fill a single form, submit images along and your website is up and running in no time. isn't it awesome?
+          p
+            | check out demo website here 
+            a.btn.btn-info(href='http://ppmakeitcount.com/', ,='', target='_blank') Demo
+          .row.margin-top.custom-padding
+            .col-lg-4.pull-left
+              h1 It's
+              p ● kind of online portfolio
+              p ● immediate show case your details
+              p ● time and money saver
+            .col-lg-8.pull-right
+              h1 Step's
+              p.boxing Connect with google
+              p.boxing Click on Create Now
+              p.boxing Fill up the form
+              p.boxing Copy link and open in new tab
+    footer.margin-top
+      .custom-footer
+        p made with love by ppmakeitcount.
+        ul.list-inline.social
+          li
+            a.button.social(href='https://github.com/ppmakeitcount', target='_blank')
+              i.fa.fa-github
+          li
+            a.button.social(href='https://in.linkedin.com/in/ppmakeitcount', target='_blank')
+              i.fa.fa-linkedin
+          li
+            a.button.social(href='https://www.freecodecamp.com/ppmakeitcount', target='_blank')
+              i.fa.fa-free-code-camp(aria-hidden='true')
+          li
+            a.button.social(href='https://twitter.com/ppmakeitcount', target='_blank')
+              i.fa.fa-twitter
+          li
+            a.button.social(href='https://www.facebook.com/ppmakeitcount', target='_blank')
+              i.fa.fa-facebook
+        h6(style='color:#FF5252') pramod.potdar1@gmail.com
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js')

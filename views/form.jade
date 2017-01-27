@@ -16,11 +16,6 @@ html
     title Profile
   body(style="background-color: #FAFAFA ;")
     .container(style="margin-top:5%; padding:10px;")
-      if user
-          a.btn.btn-default(href='/logout')= user.account.username
-      else
-          a.btn.btn-default(href='/login') connect with google 
-            i.fa.fa-google.fa-1x(aria-hidden='true')
       .col-md-8.col-md-offset-2
         .panel.panel-default
           .panel-heading
@@ -110,7 +105,7 @@ html
                   input#inpupjtLink.form-control(type='text', placeholder='Github repo / website link', name="pjLink1")
                   br
                 .col-sm-6
-                  h3 Project 1
+                  h3 Project 2
                   input#inputpjName.form-control(type='text', placeholder='Project Name *', required="true", name="pjName2")
                   br
                   textarea#inputpjDetails.form-control(rows='3' type='text', placeholder='Tech/Lang/Tools used / Shor discription *',required="true", name="pjDetails2")

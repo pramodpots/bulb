@@ -50,29 +50,40 @@ app.use(express.static("public"))
 
 app.use(function(req, res, next) {
     res.locals.login = req.isAuthenticated();
-    res.locals.session = req.session;
+    res.locals.user = req.user;
+    res.locals.fullUrl = req.get('host')+'/user/';
     next();
 })
 
-app.get('/main', function(req, res) {
-    //console.log(req.user.account.id);
+app.get('/', function(req, res) {
     res.render('main', {
         "user": req.user
     })
 })
 
-app.get('/', function(req, res) {
-    console.log(__dirname)
-    console.log(req.user._id);
-    res.render('index', {
-        "profile": profile
-    });
-
+app.get('/user/:id',function(req, res) {
+    Bulb.findOne({'user_id':req.params.id}, function(err,doc){
+        if(err) {
+            console.log(err);
+            res.send("user not found");
+        }
+        if(doc){
+            res.render('index', {
+                profile: doc.profile
+            })
+        }
+    })
 })
 
 app.get('/profile', function(req, res) {
+    if (!res.locals.login) {
+        console.log("checkin auth");
+        res.redirect('/login')
+    }
+    
     res.render('form');
 })
+
 app.get('/projects', function(req, res) {
     res.render('projects');
 })
@@ -86,7 +97,7 @@ app.get('/login',
     }));
 app.route('/auth/google/callback')
     .get(passport.authenticate('google', {
-        successRedirect: '/main',
+        successRedirect: '/profile',
         failureRedirect: '/donowhere'
     }));
 app.get('/logout', function(req, res) {
@@ -94,8 +105,7 @@ app.get('/logout', function(req, res) {
     req.session.destroy()
     res.redirect('/')
 })
-
-app.post('/add/details', upload.fields([{
+var cpUpload = upload.fields([{
     name: 'propic',
     maxCount: 1
 }, {
@@ -104,7 +114,8 @@ app.post('/add/details', upload.fields([{
 }, {
     name: 'pjImg2',
     maxCount: 1
-}]), function(req, res) {
+}])
+app.post('/add/details', cpUpload, function(req, res) {
     var data = req.body;
 
     var newObj = {
@@ -138,32 +149,37 @@ app.post('/add/details', upload.fields([{
         console.log("checkin auth");
         res.send('you are not loged in');
     }
-    
-    Bulb.findOne( { 'user_id' : req.user._id }, function(err,doc){
-        if(err) console.log(err);
-        if(doc){
+
+    Bulb.findOne({
+        'user_id': req.user._id
+    }, function(err, doc) {
+        if (err) console.log(err);
+        if (doc) {
             doc.profile = newObj;
-            doc.save(function(){
-                res.render('index',{
-                profile: doc.profile
-            })
+            doc.save(function(err,doc) {
+                if(doc){
+                    res.render('main', {
+                    done: true
+                })
+                }
+                
             });
-            
+
         }
-        else{
+        else {
             var bulb = new Bulb();
             bulb.user_id = req.user._id;
             bulb.profile = newObj;
-            
-            bulb.save(function(){
-                res.render('index',{
-                profile: newObj
+
+            bulb.save(function() {
+                res.render('main', {
+                    done: true
+                })
             })
-            })
-            
+
         }
     })
-    
+
 });
 
 app.post('/add/projects', function(req, res) {
