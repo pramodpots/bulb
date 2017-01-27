@@ -1,0 +1,59 @@
+{
+	"name": "Pramod Potdar",
+	"email": "pramod.potdar1@gmail.com",
+	"propic": "http://i67.tinypic.com/4zw8rr.jpg",
+	"about": "I am the greatest person ever born on this planet.I love myself and I am going to be verymuch successfull in life.",
+	"skills": "These are some of my values",
+	"achievements": [
+		" Won chess competitions in school.",
+		"Was in TOP 10 among 5000 students in Seed competition. (C language).",
+		"Participation in event ‘TAL NINAD’ to make Guinness world record in playing Tabla."
+	],
+	"academics": [
+		"freeCodeCamp Certifications.",
+		"B.E. Computers Sci. 66.56%",
+		"Diploma in Computer Engg. 72.58%",
+		"SCC MSB. 90.18"
+	],
+	"extraCuricular": [
+		"Attended Ethical hacking workshop.",
+		"Attended Robotics workshop",
+		"Volunteered at several college events and Rotaract events."
+	],
+	"interests": [
+		"Reading inspirational books.",
+		"Playing Guitar, Tabla.",
+		"Watching Hollywood movies."
+	],
+	"links": [{
+		"siteTitle": "linkedin",
+		"url": "https://in.linkedin.com/in/ppmakeitcount"
+	}, {
+		"siteTitle": "github",
+		"url": "https://github.com/ppmakeitcount"
+	}, {
+		"siteTitle": "freeCodeCamp",
+		"url": "https://www.freecodecamp.com/ppmakeitcount"
+	}, {
+		"siteTitle": "twitter",
+		"url": "https://twitter.com/ppmakeitcount"
+	}, {
+		"siteTitle": "facebook",
+		"url": "https://www.facebook.com/ppmakeitcount"
+	}],
+
+	"projects": [{
+			"pjName": "Chess",
+			"pjDetails": "It is chess game made in c language",
+			"pjImg": "http://i63.tinypic.com/2jfeg6g.png",
+			"pjLink": "https://github.com/ppmakeitcount/c_chess"
+		}, {
+			"pjName": "Chess",
+			"pjDetails": "It is chess game made in c language",
+			"pjImg": "http://i63.tinypic.com/2jfeg6g.png",
+			"pjLink": "https://github.com/ppmakeitcount/c_chess"
+		}
+
+
+	]
+}

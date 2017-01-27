@@ -1,0 +1,151 @@
+doctype html
+html
+    head
+        link(rel='apple-touch-icon', sizes='57x57', href='/apple-icon-57x57.png')
+        |     
+        meta(charset='utf-8')
+        |     
+        meta(http-equiv='X-UA-Compatible', content='IE=edge')
+        |     
+        meta(name='viewport', content='width=device-width, initial-scale=1')
+        |     
+        meta(name='description', content='Personal Website of ppmakeitcount or Pramod Potdar. He is Great.')
+        |     
+        meta(name='author', content='ppmakeitcount, pramodpotdar, pramod, potdar, coder, helper, opensourcelover')
+        |     
+        title #{profile.name}
+        |     
+        link(rel='stylesheet prefetch', href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css')
+        |     
+        link(rel='stylesheet prefetch', href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css')
+        |     
+        link(rel='stylesheet prefetch', href='https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css')
+        |     
+        link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Bungee|Fruktur|Gloria+Hallelujah|Mirza|Noto+Serif|Play')
+        |     
+        link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')
+        |     
+        link(rel='stylesheet', href='/style.css')
+    body(data-spy='scroll', data-target='.navbar', data-offset='50')
+        nav.navbar.navbar-inverse.navbar-custom.navbar-fixed-top
+            .container-fluid
+                // Brand and toggle get grouped for better mobile display
+                .navbar-header
+                    button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1', aria-expanded='false')
+                        span.sr-only Toggle navigation
+                        |         
+                        span.icon-bar
+                        |         
+                        span.icon-bar
+                        |         
+                        span.icon-bar
+                    |                 
+                    a.navbar-brand(href='#')
+                        span.bungee #{profile.name}
+                // Collect the nav links, forms, and other content for toggling
+                #bs-example-navbar-collapse-1.collapse.navbar-collapse
+                    ul.nav.navbar-nav.navbar-right
+                        li.active
+                            a(href='#top') Home
+                        |                     
+                        li
+                            a(href='#about') About
+                        |                     
+                        li
+                            a(href='#portfolio') Portfolio
+                        |                     
+                        li
+                            a(href='#contact') Contact
+                // /.navbar-collapse
+                //
+                    /.container-fluid
+        |     
+        section#top.container-fluid.section1
+            .space-class
+            |         
+            .row.text-center
+                #pro-pic.col-lg-3.col-md-3.col-sm-3.pull-left
+                    img.img-responsive.img-circle(src='/#{profile.propic} ', width='400px', alt='pofile-pic')
+                |             
+                .col-lg-9.col-md-9.col-sm-9.pull-right
+                    h2.fruktur #{profile.name}
+                    |                 
+                    .text-left
+                        blockquote
+                            p.lead(style='font-size:18px') #{ profile.about }
+                    .text-left
+                        blockquote
+                            p.lead(style='font-size:20px') #{ profile.skills }
+                                
+        |     
+        section#about.contianer-fluid.section2
+            .row
+                h1 About
+                |             
+                .col-lg-3.col-md-6.col-sm-6.col-xs-12
+                    .custom-border.border-pink
+                        h4 EXPERIANCE
+                        each e in profile.experiance                     
+                            p  &#x25CF; #{ e }
+                |             
+                .col-lg-3.col-md-6.col-sm-6.col-xs-12
+                    .custom-border.border-pink
+                        h4  ACHIEVEMENTS
+                        each e in profile.achievements                     
+                            p  &#x25CF; #{ e }
+                |             
+                .col-lg-3.col-md-6.col-sm-6.col-xs-12
+                    .custom-border.border-pink
+                        h4 ACADEMICS
+                        each e in profile.academics                     
+                            p  &#x25CF; #{ e }
+                |             
+                .col-lg-3.col-md-6.col-sm-6.col-xs-12
+                    .custom-border.border-pink
+                        h4 EXTRA-CURICULAR 
+                        each e in profile.extra                     
+                            p  &#x25CF; #{ e }
+        |     
+        section#portfolio.contianer-fluid.section3
+            .row
+                h1 Projects
+                |             
+                each p in profile.projects
+                    .col-lg-3.col-md-6.col-sm-6.col-xs-12.text-center
+                        a(href='#{ p.pjLink }', target='_blank')
+                            .border-blue
+                                img.rounded.img-responsive(src='/#{ p.pjImg } ' alt=' #{ p.pjName } ')
+                                |                         
+                                h4 #{ p.pjName }
+                                |                         
+                                h4
+                                    small #{ p.pjDetails }
+        |     
+        footer#contact.margin-custom
+            .container-fluid.black900
+                .row.text-center(style='padding:20px')
+                    ul.list-inline
+                        li
+                            a.button.social(href='https://in.linkedin.com/in/ppmakeitcount', target='_blank')
+                                i.fa.fa-fw.fa-4x.fa-linkedin
+                        |                     
+                        li
+                            a.button.social(href='https://github.com/ppmakeitcount', target='_blank')
+                                i.fa.fa-fw.fa-4x.fa-github
+                        |                     
+                        li
+                            a.button.social(href='https://www.freecodecamp.com/ppmakeitcount', target='_blank')
+                                i.fa.fa-fw.fa-4x.fa-free-code-camp(aria-hidden='true')
+                        |                     
+                        li
+                            a.button.social(href='https://twitter.com/ppmakeitcount', target='_blank')
+                                i.fa.fa-fw.fa-4x.fa-twitter
+                        |                     
+                        li
+                            a.button.social(href='https://www.facebook.com/ppmakeitcount', target='_blank')
+                                i.fa.fa-fw.fa-4x.fa-facebook
+                    |                 
+                    h6(style='color:#FF5252') #{profile.email}
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js')
+    script(src='/index.js')
