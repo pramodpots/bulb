@@ -7,8 +7,15 @@ var mongoose = require("mongoose");
 var session = require("express-session");
 var Bulb = require("./bulbschema");
 var cool = require('cool-ascii-faces');
+var uristring = process.env.MONGOLAB_URI;
 
-mongoose.connect('localhost:27017/data')
+mongoose.connect(uristring, function(err, res) {
+    if (err) {
+        console.log('ERROR connecting to: ' + uristring + '. ' + err);
+    } else {
+        console.log('Succeeded connected to: ' + uristring);
+    }
+});
 
 app.use(session({
     secret: 'ppmakeitcountsapp',
@@ -185,7 +192,6 @@ app.post('/add/details', cpUpload, function(req, res) {
     })
 
 });
-
 app.post('/add/projects', function(req, res) {
     var d = req.body;
     var temp = [];
