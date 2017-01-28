@@ -201,6 +201,6 @@ app.post('/add/projects', function(req, res) {
     res.send(temp);
 })
 
-app.listen(8080, function() {
-    console.log("running..........");
-})
+http.listen(process.env.PORT || 3000, function() {
+    console.log('listening on', http.address().port);
+});
