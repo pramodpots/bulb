@@ -6,7 +6,7 @@ require("./config/passport")
 var mongoose = require("mongoose");
 var session = require("express-session");
 var Bulb = require("./bulbschema");
-
+var cool = require('cool-ascii-faces');
 
 mongoose.connect('localhost:27017/data')
 
@@ -35,9 +35,9 @@ var storage = multer.diskStorage({
 })
 
 var upload = multer({
-        storage: storage
-    })
-    //var cpUpload = upload.fields([{ name: 'propic', maxCount: 1 }, { name: 'pjImg1', maxCount: 1 }])
+    storage: storage
+})
+//var cpUpload = upload.fields([{ name: 'propic', maxCount: 1 }, { name: 'pjImg1', maxCount: 1 }])
 app.set("views", "./views");
 app.set("view engine", "jade");
 
@@ -51,7 +51,7 @@ app.use(express.static("public"))
 app.use(function(req, res, next) {
     res.locals.login = req.isAuthenticated();
     res.locals.user = req.user;
-    res.locals.fullUrl = req.get('host')+'/user/';
+    res.locals.fullUrl = req.get('host') + '/user/';
     next();
 })
 
@@ -60,14 +60,19 @@ app.get('/', function(req, res) {
         "user": req.user
     })
 })
+app.get('/cool', function(request, response) {
+    response.send(cool());
+});
 
-app.get('/user/:id',function(req, res) {
-    Bulb.findOne({'user_id':req.params.id}, function(err,doc){
-        if(err) {
+app.get('/user/:id', function(req, res) {
+    Bulb.findOne({
+        'user_id': req.params.id
+    }, function(err, doc) {
+        if (err) {
             console.log(err);
             res.send("user not found");
         }
-        if(doc){
+        if (doc) {
             res.render('index', {
                 profile: doc.profile
             })
@@ -80,7 +85,7 @@ app.get('/profile', function(req, res) {
         console.log("checkin auth");
         res.redirect('/login')
     }
-    
+
     res.render('form');
 })
 
@@ -156,17 +161,16 @@ app.post('/add/details', cpUpload, function(req, res) {
         if (err) console.log(err);
         if (doc) {
             doc.profile = newObj;
-            doc.save(function(err,doc) {
-                if(doc){
+            doc.save(function(err, doc) {
+                if (doc) {
                     res.render('main', {
-                    done: true
-                })
+                        done: true
+                    })
                 }
-                
+
             });
 
-        }
-        else {
+        } else {
             var bulb = new Bulb();
             bulb.user_id = req.user._id;
             bulb.profile = newObj;
