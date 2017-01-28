@@ -1,9 +1,9 @@
 'use strict';
 
 module.exports = {
-	'googleAuth': {
-		'clientID': '975200797117-llaa71rgje9m0mhk4i8cqus79p64oi65.apps.googleusercontent.com',
-		'clientSecret': '4Bk7o454xdEwu4hsc0tggaGZ',
-		'callbackURL': 'https://porlio-ppmakeitcount.c9users.io/auth/google/callback'
-	}
+    'googleAuth': {
+        'clientID': '1071611272261-rt0f9jamg81ojo1f6egj778hq8v6skle.apps.googleusercontent.com',
+        'clientSecret': 'hN74DwULiKeu9K16SOhJreWp',
+        'callbackURL': 'https://pp-bulb.herokuapp.com/auth/google/callback'
+    }
 };
