@@ -65,7 +65,7 @@ html
             |         
             .row.text-center
                 #pro-pic.col-lg-3.col-md-3.col-sm-3.pull-left
-                    img.img-responsive.img-circle(src='/#{profile.propic} ', width='400px', alt='pofile-pic')
+                    img.img-responsive.img-circle(src='/#{profile.propic} ', width='400px',heigth='400px', alt='pofile-pic')
                 |             
                 .col-lg-9.col-md-9.col-sm-9.pull-right
                     h2.fruktur #{profile.name}
@@ -76,7 +76,7 @@ html
                     .text-left
                         blockquote
                             p.lead(style='font-size:20px') #{ profile.skills }
-                                
+
         |     
         section#about.contianer-fluid.section2
             .row

@@ -67,9 +67,6 @@ app.get('/', function(req, res) {
         "user": req.user
     })
 })
-app.get('/cool', function(request, response) {
-    response.send(cool());
-});
 
 app.get('/user/:id', function(req, res) {
     Bulb.findOne({
@@ -90,7 +87,7 @@ app.get('/user/:id', function(req, res) {
 app.get('/profile', function(req, res) {
     if (!res.locals.login) {
         console.log("checkin auth");
-        res.redirect('/login')
+        res.redirect('/')
     }
 
     res.render('form');
@@ -109,7 +106,7 @@ app.get('/login',
     }));
 app.route('/auth/google/callback')
     .get(passport.authenticate('google', {
-        successRedirect: '/profile',
+        successRedirect: '/',
         failureRedirect: '/donowhere'
     }));
 app.get('/logout', function(req, res) {
@@ -192,20 +189,6 @@ app.post('/add/details', cpUpload, function(req, res) {
     })
 
 });
-app.post('/add/projects', function(req, res) {
-    var d = req.body;
-    var temp = [];
-    for (var i = 0; i < req.body.email.length; i++) {
-        var obj = {
-            "pjName": d.pjName[i],
-            "pjDetails": d.pjDetails[i],
-            "pjImg": d.pjImg[i],
-            "pjLink": d.pjLink[i]
-        }
-        temp.push(obj);
-    }
-    res.send(temp);
-})
 
 app.listen(process.env.PORT || 3000, function() {
     console.log('listening on' + process.env.PORT);
