@@ -32,6 +32,7 @@ html
                     | bulb 
                     i.fa.fa-5x.fa-lightbulb-o(aria-hidden='true')
                 h2(style='color: #FFA000; font-family:Cookie;') yeah!!! - Creating you own website is just a click away!
+                a.btn.btn-lg.btn-danger(href='/profile')  Create Now! 
                 if user
                     a.btn.btn-default(href='/logout')= user.account.username
                         small  logout

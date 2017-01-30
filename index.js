@@ -8,13 +8,22 @@ var session = require("express-session");
 var Bulb = require("./bulbschema");
 var cool = require('cool-ascii-faces');
 var uristring = process.env.MONGOLAB_URI;
-
+var bodyParser = require("body-parser");
+var multer = require("multer")
+var cloudinary = require('cloudinary');
+var multerCloudinary = require('multer-cloudinary');
 mongoose.connect(uristring, function(err, res) {
     if (err) {
         console.log('ERROR connecting to: ' + uristring + '. ' + err);
     } else {
         console.log('Succeeded connected to: ' + uristring);
     }
+});
+
+cloudinary.config({
+    cloud_name: 'ppmakeitcount',
+    api_key: '195835998171227',
+    api_secret: '2kbxGdgLjOxBnDoDOGY_Qyw-iqs'
 });
 
 app.use(session({
@@ -24,22 +33,25 @@ app.use(session({
 
 }));
 
-
-
+var cloudinaryStorage = multerCloudinary({
+    cloudinary: cloudinary
+});
+var cloudinaryUpload = multer({
+    storage: cloudinaryStorage
+});
+//router.put('/me', cloudinaryUpload.fields([{name: 'cover', maxCount:1}]));
 app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(express.static(__dirname + '/public/uploads'));
-var bodyParser = require("body-parser");
-var multer = require("multer")
-var storage = multer.diskStorage({
-    destination: function(req, file, cb) {
-        cb(null, __dirname + '/public/uploads')
-    },
-    filename: function(req, file, cb) {
-        cb(null, req.user._id + Date.now() + file.originalname)
-    }
-})
+// var storage = multer.diskStorage({
+//     destination: function(req, file, cb) {
+//         cb(null, __dirname + '/public/uploads')
+//     },
+//     filename: function(req, file, cb) {
+//         cb(null, Date.now() + file.originalname)
+//     }
+// })
 
 var upload = multer({
     storage: storage
@@ -63,9 +75,17 @@ app.use(function(req, res, next) {
 })
 
 app.get('/', function(req, res) {
+
     res.render('main', {
         "user": req.user
     })
+})
+
+app.get('/uploadSingle', function(req, res) {
+    cloudinary.uploader.upload('pp.jpeg', function(result) {
+        console.log(result)
+    });
+    res.sendStatus(200);
 })
 
 app.get('/user/:id', function(req, res) {
@@ -85,21 +105,14 @@ app.get('/user/:id', function(req, res) {
 })
 
 app.get('/profile', function(req, res) {
-    if (!res.locals.login) {
-        console.log("checkin auth");
-        res.redirect('/')
-    }
+    // if (!res.locals.login) {
+    //     console.log("checkin auth");
+    //     res.redirect('/')
+    // }
 
     res.render('form');
 })
 
-app.get('/projects', function(req, res) {
-    res.render('projects');
-})
-
-// authentication
-
-//app.get('/login', passport.authenticate('google', { scope: 'https://www.google.com/m8/feeds' }));
 app.get('/login',
     passport.authenticate('google', {
         scope: ['https://www.googleapis.com/auth/plus.login']
@@ -124,9 +137,15 @@ var cpUpload = upload.fields([{
     name: 'pjImg2',
     maxCount: 1
 }])
-app.post('/add/details', cpUpload, function(req, res) {
+app.post('/add/details', cloudinaryUpload.fields([{
+    name: 'cover',
+    maxCount: 1
+}]), function(req, res) {
     var data = req.body;
 
+    cloudinary.uploader.upload(req.files.propic[0], function(result) {
+        console.log(result)
+    });
     var newObj = {
         "name": data.name,
         "email": data.email,
@@ -154,10 +173,10 @@ app.post('/add/details', cpUpload, function(req, res) {
         }]
     }
 
-    if (!res.locals.login) {
-        console.log("checkin auth");
-        res.send('you are not loged in');
-    }
+    // if (!res.locals.login) {
+    //     console.log("checkin auth");
+    //     res.send('you are not loged in');
+    // }
 
     Bulb.findOne({
         'user_id': req.user._id
