@@ -16,7 +16,7 @@ var cloudinary = require('cloudinary');
 var fs = require("fs");
 var path = require('path');
 var Datauri = require('datauri')
-
+var MongoStore = require('connect-mongo')(session);
 mongoose.connect(uristring, function(err, res) {
     if (err) {
         console.log('ERROR connecting to: ' + uristring + '. ' + err);
@@ -30,6 +30,12 @@ app.use(session({
     secret: 'ppmakeitcountsapp',
     resave: false,
     saveUninitialized: true,
+    store: new MongoStore({
+        mongooseConnection: mongoose.connection
+    }),
+    cookie: {
+        maxAge: 10 * 60 * 60 * 60 * 1000
+    }
 
 }));
 
@@ -66,6 +72,7 @@ app.locals.api_key = cloudinary.config().api_key;
 app.locals.cloud_name = cloudinary.config().cloud_name;
 
 app.use(function(req, res, next) {
+    res.locals.session = req.session;
     res.locals.login = req.isAuthenticated();
     res.locals.user = req.user;
     res.locals.fullUrl = req.get('host') + '/user/';
