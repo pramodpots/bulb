@@ -181,11 +181,13 @@ app.post('/add/details', cpUpload, function(req, res) {
                                 User.findById(req.user._id, function(err, user) {
                                     if (err) res.send("cannot update user info");
                                     if (user) {
-                                        user.url = res.locals.fullUrl + req.user._id
+                                        user.url = res.locals.fullUrl + req.user._id;
+                                        user.save(function() {
+                                            res.redirect('/');
+                                        })
                                     }
                                 })
 
-                                res.redirect('/');
                             }
 
                         });
@@ -199,17 +201,16 @@ app.post('/add/details', cpUpload, function(req, res) {
                             User.findById(req.user._id, function(err, user) {
                                 if (err) res.send("cannot update user info");
                                 if (user) {
-                                    user.url = res.locals.fullUrl + req.user._id
+                                    user.url = res.locals.fullUrl + req.user._id;
+                                    user.save(function() {
+                                        res.redirect('/');
+                                    })
                                 }
                             })
-
-                            res.redirect('/');
                         })
 
                     }
                 })
-
-                //res.send(newObj)
             });
         });
     });
