@@ -78,7 +78,11 @@ app.get('/', function(req, res) {
         "user": req.user
     })
 })
-
+app.get('/user/details', function(req, res) {
+    User.find({}, function(err, doc) {
+        res.send(doc);
+    })
+})
 app.get('/user/:id', function(req, res) {
     Bulb.findOne({
         'user_id': req.params.id
