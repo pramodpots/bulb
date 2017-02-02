@@ -5,7 +5,7 @@ html
         meta(charset='utf-8')
         meta(http-equiv='X-UA-Compatible', content='IE=edge')
         meta(name='viewport', content='width=device-width, initial-scale=1')
-        meta(name='description', content='Personal Website of ppmakeitcount or Pramod Potdar. He is Great.')
+        meta(name='description', content='This is webapp designed to help students to showcase their talent at one place. It is kind of online resume. Designed and developed by ppmakeitcount')
         meta(name='author', content='ppmakeitcount, pramodpotdar, pramod, potdar, coder, helper, opensourcelover')
 
 
@@ -23,37 +23,37 @@ html
             strong Beta ! 
             |  we are in beta version ryt now!
         .container-fluid.margin-top
-            if done
-                h1 Copy this url: 
-                .well.well-lg
-                    p #{ fullUrl }#{ user._id }
             .row.text-center.margin-top
                 h1.title
                     | bulb 
                     i.fa.fa-5x.fa-lightbulb-o(aria-hidden='true')
                 h2(style='color: #FFA000; font-family:Cookie;') yeah!!! - Creating you own website is just a click away!
-                a.btn.btn-lg.btn-danger(href='/profile')  Create Now! 
                 if user
                     a.btn.btn-default(href='/logout')= user.account.username
                         small  logout
                     a.btn.btn-lg.btn-danger(href='/profile')  Create Now! 
+                    if user.url != ""
+                        h2 Your website is running at: 
+                        .well.well-lg
+                            p user.url
                 else
                     p.text-danger To create website you should be logged in!
                     br
                     a.btn.btn-lg.btn-default(href='/login') login with google 
                         i.fa.fa-google.fa-1x(aria-hidden='true')
+
         .container-fluid.margin-top
             .row.center-block
                 .col-lg-8.pull-left.section1
-                    | no time to sit and code html, css, jquery?
+                    | &#35; no time to sit and code html, css, jquery?
                     br
-                    |  no sufficient funds to buy domain name and space?
+                    |  &#35; no sufficient funds to buy domain name and space?
                     br
             .row.center-block.margin-top
                 .col-lg-8.pull-right.section2
-                    | want to showcase all your projects at one place?
+                    | &#35; want to showcase all your projects at one place?
                     br
-                    |  provide all your social contact links (linkedin, github etc) to viewers?
+                    |  &#35; provide all your social contact links (linkedin, github etc) to viewers?
                     br
             .row.center-block.margin-top
                 .col-lg-8.col-lg-offset-2.section3

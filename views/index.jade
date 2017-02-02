@@ -9,7 +9,7 @@ html
         |     
         meta(name='viewport', content='width=device-width, initial-scale=1')
         |     
-        meta(name='description', content='Personal Website of ppmakeitcount or Pramod Potdar. He is Great.')
+        meta(name='description', content='This is webapp designed to help students to showcase their talent at one place. It is kind of online resume. Designed and developed by ppmakeitcount')
         |     
         meta(name='author', content='ppmakeitcount, pramodpotdar, pramod, potdar, coder, helper, opensourcelover')
         |     
@@ -65,7 +65,7 @@ html
             |         
             .row.text-center
                 #pro-pic.col-lg-3.col-md-3.col-sm-3.pull-left
-                    img.img-responsive.img-circle(src='/#{profile.propic} ', width='400px',heigth='400px', alt='pofile-pic')
+                    img.img-responsive.img-circle(src='#{profile.propic} ', width='400px',heigth='400px', alt='pofile-pic')
                 |             
                 .col-lg-9.col-md-9.col-sm-9.pull-right
                     h2.fruktur #{profile.name}
@@ -114,7 +114,7 @@ html
                     .col-lg-3.col-md-6.col-sm-6.col-xs-12.text-center
                         a(href='#{ p.pjLink }', target='_blank')
                             .border-blue
-                                img.rounded.img-responsive(src='/#{ p.pjImg } ' alt=' #{ p.pjName } ')
+                                img.rounded.img-responsive(src='#{ p.pjImg } ' alt=' #{ p.pjName } ')
                                 |                         
                                 h4 #{ p.pjName }
                                 |                         

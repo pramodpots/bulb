@@ -7,6 +7,8 @@ require("./config/passport")
 var mongoose = require("mongoose");
 var session = require("express-session");
 var Bulb = require("./bulbschema");
+var User = require("./userschema");
+
 var uristring = process.env.MONGOLAB_URI;
 var bodyParser = require("body-parser");
 var multer = require("multer")
@@ -77,13 +79,6 @@ app.get('/', function(req, res) {
     })
 })
 
-app.get('/uploadSingle', function(req, res) {
-    cloudinary.uploader.upload('pp.jpeg', function(result) {
-        console.log(result)
-    });
-    res.sendStatus(200);
-})
-
 app.get('/user/:id', function(req, res) {
     Bulb.findOne({
         'user_id': req.params.id
@@ -101,28 +96,14 @@ app.get('/user/:id', function(req, res) {
 })
 
 app.get('/profile', function(req, res) {
-    // if (!res.locals.login) {
-    //     console.log("checkin auth");
-    //     res.redirect('/')
-    // }
-
-    res.render('form');
+    if (!res.locals.login) {
+        console.log("checkin auth");
+        res.redirect('/')
+    } else
+        res.render('form');
 })
 
-app.get('/login',
-    passport.authenticate('google', {
-        scope: ['https://www.googleapis.com/auth/plus.login']
-    }));
-app.route('/auth/google/callback')
-    .get(passport.authenticate('google', {
-        successRedirect: '/',
-        failureRedirect: '/donowhere'
-    }));
-app.get('/logout', function(req, res) {
-    req.logout();
-    req.session.destroy()
-    res.redirect('/')
-})
+
 var cpUpload = upload.fields([{
     name: 'propic',
     maxCount: 1
@@ -141,7 +122,7 @@ app.post('/add/details', cpUpload, function(req, res) {
 
     if (!res.locals.login) {
         console.log("checkin auth");
-        res.render('main')
+        res.redirect('/')
     }
 
 
@@ -193,9 +174,14 @@ app.post('/add/details', cpUpload, function(req, res) {
                         doc.profile = newObj;
                         doc.save(function(err, doc) {
                             if (doc) {
-                                res.render('main', {
-                                    done: true
+                                User.findById(req.user._id, function(err, user) {
+                                    if (err) res.send("cannot update user info");
+                                    if (user) {
+                                        user.url = res.locals.fullUrl + req.user._id
+                                    }
                                 })
+
+                                res.redirect('/');
                             }
 
                         });
@@ -206,9 +192,14 @@ app.post('/add/details', cpUpload, function(req, res) {
                         bulb.profile = newObj;
 
                         bulb.save(function() {
-                            res.render('main', {
-                                done: true
+                            User.findById(req.user._id, function(err, user) {
+                                if (err) res.send("cannot update user info");
+                                if (user) {
+                                    user.url = res.locals.fullUrl + req.user._id
+                                }
                             })
+
+                            res.redirect('/');
                         })
 
                     }
@@ -223,3 +214,20 @@ app.post('/add/details', cpUpload, function(req, res) {
 app.listen(process.env.PORT || 3000, function() {
     console.log('listening on' + process.env.PORT);
 });
+
+
+//authentication
+app.get('/login',
+    passport.authenticate('google', {
+        scope: ['https://www.googleapis.com/auth/plus.login']
+    }));
+app.route('/auth/google/callback')
+    .get(passport.authenticate('google', {
+        successRedirect: '/',
+        failureRedirect: '/donowhere'
+    }));
+app.get('/logout', function(req, res) {
+    req.logout();
+    req.session.destroy()
+    res.redirect('/')
+})
