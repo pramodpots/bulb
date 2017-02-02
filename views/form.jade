@@ -1,119 +1,119 @@
 doctype html
 html
-  head
-    meta(charset='utf-8')
-    meta(http-equiv='X-UA-Compatible', content='IE=edge')
-    meta(name='viewport', content='width=device-width, initial-scale=1')
-    meta(name='description', content='Personal Website of ppmakeitcount or Pramod Potdar. He is Great.')
-    meta(name='author', content='ppmakeitcount, pramodpotdar, pramod, potdar, coder, helper, opensourcelover')
-    
-    
-    link(rel='stylesheet prefetch', href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css')
-    link(rel='stylesheet prefetch', href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css')
-    link(rel='stylesheet prefetch', href='https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css')
-    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')
-    link(rel='stylesheet', href='style.css')
-    title Profile
-  body(style="background-color: #FAFAFA ;")
-    .container(style="margin-top:5%; padding:10px;")
-      .col-md-8.col-md-offset-2
-        .panel.panel-default
-          .panel-heading
-            h3.panel-title Welcome! Enter Your Details.
-            small.text-danger fields marked with * are required
-          .panel-body
-            form.form-horizontal(action='/add/details', method='post', enctype="multipart/form-data")
-              .form-group
-                label.col-sm-2.control-label(for='name') Name*
-                .col-sm-10
-                  input#inputName.form-control(type='text', placeholder='Name', required="true", name="name")
-              .form-group
-                label.col-sm-2.control-label(for='email') Email*
-                .col-sm-10
-                  input#inputEmail.form-control(type='text', placeholder='email@example.com',required="true", name="email")
-              .form-group
-                label.col-sm-2.control-label(for='propic') Profile Pic*
-                .col-sm-10
-                  input#inputPropic.form-control(type='file',name="propic",required="true")
-              .form-group
-                label.col-sm-2.control-label(for='about') About*
-                .col-sm-10
-                  textarea#inputAbout.form-control(rows='3', type='text', placeholder='Discribe yourself in few words', required="true", name="about")
-              .form-group
-                label.col-sm-2.control-label(for='skills') Skills*
-                .col-sm-10
-                  textarea#inputSkills.form-control(rows='2', type='text', placeholder='What is your skill set', required="true", name="skills")
-              hr
-              .form-group 
-                label.col-sm-2.control-label(for='linkedin') linkedin
-                .col-sm-10
-                  input#inputLinkedin.form-control(rows='2', type='text', placeholder='linkedin link', name="linkedin")
-                label.col-sm-2.control-label(for='github') github
-                .col-sm-10
-                  input#inputGithub.form-control(rows='2', type='text', placeholder='github link', name="github")
-                label.col-sm-2.control-label(for='facebook') facebook
-                .col-sm-10
-                  input#inputFacebook.form-control(rows='2', type='text', placeholder='facebook link', name="facebook")
-                label.col-sm-2.control-label(for='twitter') twitter
-                .col-sm-10
-                  input#inputTwitter.form-control(rows='2', type='text', placeholder='twitter link', name="twitter")
-              hr
-              .form-group
-                label.col-sm-2.control-label(for='experiance') Experiance
-                .col-sm-10
-                  input#inputExperiance.form-control(type='text', placeholder='Company Name / Job Title / Short Discription', name="experiance")
-                  br
-                  input#inputExperiance.form-control(type='text', placeholder='Experiance 2', name="experiance")
-                  br
-                  input#inputExperiance.form-control(type='text', placeholder='Experiance 3', name="experiance")
-              hr
-              .form-group
-                label.col-sm-2.control-label(for='achievements') Achievements
-                .col-sm-10
-                  input#inputAchievements.form-control(type='text', placeholder='Made my parents Porud', name="achievements")
-                  br
-                  input#inputAchievements.form-control(type='text', placeholder='Achievement 2', name="achievements")
-                  br
-                  input#inputAchievements.form-control(type='text', placeholder='Achievement 3', name="achievements")
-              hr
-              .form-group
-                label.col-sm-2.control-label(for='academics') Academics Details
-                .col-sm-10
-                  input#inputAcademics.form-control(type='text', placeholder='School Name / Degree / Grade', name="academics")
-                  br
-                  input#inputAcademics.form-control(type='text', placeholder='Academics 2', name="academics")
-                  br
-                  input#inputAcademics.form-control(type='text', placeholder='Academics 3', name="academics")
-              hr
-              .form-group
-                label.col-sm-2.control-label(for='extra') Extra-Curicular /Hobbies /Interests
-                .col-sm-10
-                  input#inputExtra.form-control(type='text', placeholder='Attended Ethical hacking workshop', name="extra")
-                  br
-                  input#inputExtra.form-control(type='text', placeholder='Reading inspirational books.', name="extra")
-                  br
-                  input#inputExtra.form-control(type='text', placeholder='Extra 3', name="extra")
-              .row
-                .col-sm-6
-                  h3 Project 1
-                  input#inputpjName.form-control(type='text', placeholder='Project Name *', required="true", name="pjName1")
-                  br
-                  textarea#inputpjDetails.form-control(rows='3' type='text', placeholder='Tech/Lang/Tools used / Shor discription *',required="true", name="pjDetails1")
-                  br
-                  input#inputPropic.form-control(type='file',name="pjImg1")
-                  br
-                  input#inpupjtLink.form-control(type='text', placeholder='Github repo / website link', name="pjLink1")
-                  br
-                .col-sm-6
-                  h3 Project 2
-                  input#inputpjName.form-control(type='text', placeholder='Project Name *', required="true", name="pjName2")
-                  br
-                  textarea#inputpjDetails.form-control(rows='3' type='text', placeholder='Tech/Lang/Tools used / Shor discription *',required="true", name="pjDetails2")
-                  br
-                  input#inputPropic.form-control(type='file',name="pjImg2")
-                  br
-                  input#inpupjtLink.form-control(type='text', placeholder='Github repo / website link', name="pjLink2")
-                  br
-              .form-group
-                .col-sm-offset-2.col-sm-10
-                  button.btn.btn-default.btn-lg(type='submit') Done
+    head
+        meta(charset='utf-8')
+        meta(http-equiv='X-UA-Compatible', content='IE=edge')
+        meta(name='viewport', content='width=device-width, initial-scale=1')
+        meta(name='description', content='Personal Website of ppmakeitcount or Pramod Potdar. He is Great.')
+        meta(name='author', content='ppmakeitcount, pramodpotdar, pramod, potdar, coder, helper, opensourcelover')
+
+
+        link(rel='stylesheet prefetch', href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css')
+        link(rel='stylesheet prefetch', href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css')
+        link(rel='stylesheet prefetch', href='https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css')
+        link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')
+        link(rel='stylesheet', href='style.css')
+        title Profile
+    body(style="background-color: #FAFAFA ;")
+        .container(style="margin-top:5%; padding:10px;")
+            .col-md-8.col-md-offset-2
+                .panel.panel-default
+                    .panel-heading
+                        h3.panel-title Welcome! Enter Your Details.
+                        small.text-danger fields marked with * are required
+                    .panel-body
+                        form.form-horizontal(action='/add/details', method='post', enctype="multipart/form-data")
+                            .form-group
+                                label.col-sm-2.control-label(for='name') Name*
+                                .col-sm-10
+                                    input#inputName.form-control(type='text', placeholder='Name', required="true", name="name")
+                            .form-group
+                                label.col-sm-2.control-label(for='email') Email*
+                                .col-sm-10
+                                    input#inputEmail.form-control(type='text', placeholder='email@example.com',required="true", name="email")
+                            .form-group
+                                label.col-sm-2.control-label(for='propic') Profile Pic*
+                                .col-sm-10
+                                    input#inputPropic.form-control(type='file',name="propic",required="true")
+                            .form-group
+                                label.col-sm-2.control-label(for='about') About*
+                                .col-sm-10
+                                    textarea#inputAbout.form-control(rows='3', type='text', placeholder='Discribe yourself in few words', required="true", name="about")
+                            .form-group
+                                label.col-sm-2.control-label(for='skills') Skills*
+                                .col-sm-10
+                                    textarea#inputSkills.form-control(rows='2', type='text', placeholder='What is your skill set', required="true", name="skills")
+                            hr
+                            .form-group 
+                                label.col-sm-2.control-label(for='linkedin') linkedin
+                                .col-sm-10
+                                    input#inputLinkedin.form-control(rows='2', type='text', placeholder='linkedin link', name="linkedin")
+                                label.col-sm-2.control-label(for='github') github
+                                .col-sm-10
+                                    input#inputGithub.form-control(rows='2', type='text', placeholder='github link', name="github")
+                                label.col-sm-2.control-label(for='facebook') facebook
+                                .col-sm-10
+                                    input#inputFacebook.form-control(rows='2', type='text', placeholder='facebook link', name="facebook")
+                                label.col-sm-2.control-label(for='twitter') twitter
+                                .col-sm-10
+                                    input#inputTwitter.form-control(rows='2', type='text', placeholder='twitter link', name="twitter")
+                            hr
+                            .form-group
+                                label.col-sm-2.control-label(for='experiance') Experiance
+                                .col-sm-10
+                                    input#inputExperiance.form-control(type='text', placeholder='Company Name / Job Title / Short Discription', name="experiance")
+                                    br
+                                    input#inputExperiance.form-control(type='text', placeholder='Experiance 2', name="experiance")
+                                    br
+                                    input#inputExperiance.form-control(type='text', placeholder='Experiance 3', name="experiance")
+                            hr
+                            .form-group
+                                label.col-sm-2.control-label(for='achievements') Achievements
+                                .col-sm-10
+                                    input#inputAchievements.form-control(type='text', placeholder='Made my parents Porud', name="achievements")
+                                    br
+                                    input#inputAchievements.form-control(type='text', placeholder='Achievement 2', name="achievements")
+                                    br
+                                    input#inputAchievements.form-control(type='text', placeholder='Achievement 3', name="achievements")
+                            hr
+                            .form-group
+                                label.col-sm-2.control-label(for='academics') Academics Details
+                                .col-sm-10
+                                    input#inputAcademics.form-control(type='text', placeholder='School Name / Degree / Grade', name="academics")
+                                    br
+                                    input#inputAcademics.form-control(type='text', placeholder='Academics 2', name="academics")
+                                    br
+                                    input#inputAcademics.form-control(type='text', placeholder='Academics 3', name="academics")
+                            hr
+                            .form-group
+                                label.col-sm-2.control-label(for='extra') Extra-Curicular /Hobbies /Interests
+                                .col-sm-10
+                                    input#inputExtra.form-control(type='text', placeholder='Attended Ethical hacking workshop', name="extra")
+                                    br
+                                    input#inputExtra.form-control(type='text', placeholder='Reading inspirational books.', name="extra")
+                                    br
+                                    input#inputExtra.form-control(type='text', placeholder='Extra 3', name="extra")
+                            .row
+                                .col-sm-6
+                                    h3 Project 1
+                                    input#inputpjName.form-control(type='text', placeholder='Project Name *', required="true", name="pjName1")
+                                    br
+                                    textarea#inputpjDetails.form-control(rows='3' type='text', placeholder='Tech/Lang/Tools used / Shor discription *',required="true", name="pjDetails1")
+                                    br
+                                    input#inputImg1.form-control(type='file',name="pjImg1", required="true")
+                                    br
+                                    input#inpupjtLink.form-control(type='text', placeholder='Github repo / website link', name="pjLink1")
+                                    br
+                                .col-sm-6
+                                    h3 Project 2
+                                    input#inputpjName.form-control(type='text', placeholder='Project Name *', required="true", name="pjName2")
+                                    br
+                                    textarea#inputpjDetails.form-control(rows='3' type='text', placeholder='Tech/Lang/Tools used / Shor discription *',required="true", name="pjDetails2")
+                                    br
+                                    input#inputImg2.form-control(type='file',name="pjImg2", required="true")
+                                    br
+                                    input#inpupjtLink.form-control(type='text', placeholder='Github repo / website link', name="pjLink2")
+                                    br
+                            .form-group
+                                .col-sm-offset-2.col-sm-10
+                                    button.btn.btn-default.btn-lg(type='submit') Done
