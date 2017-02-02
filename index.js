@@ -1,17 +1,20 @@
+'use strict';
+
 var express = require("express");
 var app = express();
-var profile = require("./public/profile.json");
 var passport = require("passport");
 require("./config/passport")
 var mongoose = require("mongoose");
 var session = require("express-session");
 var Bulb = require("./bulbschema");
-var cool = require('cool-ascii-faces');
 var uristring = process.env.MONGOLAB_URI;
 var bodyParser = require("body-parser");
 var multer = require("multer")
 var cloudinary = require('cloudinary');
-var multerCloudinary = require('multer-cloudinary');
+var fs = require("fs");
+var path = require('path');
+var Datauri = require('datauri')
+
 mongoose.connect(uristring, function(err, res) {
     if (err) {
         console.log('ERROR connecting to: ' + uristring + '. ' + err);
@@ -19,12 +22,7 @@ mongoose.connect(uristring, function(err, res) {
         console.log('Succeeded connected to: ' + uristring);
     }
 });
-
-cloudinary.config({
-    cloud_name: 'ppmakeitcount',
-    api_key: '195835998171227',
-    api_secret: '2kbxGdgLjOxBnDoDOGY_Qyw-iqs'
-});
+mongoose.Promise = global.Promise;
 
 app.use(session({
     secret: 'ppmakeitcountsapp',
@@ -33,25 +31,17 @@ app.use(session({
 
 }));
 
-var cloudinaryStorage = multerCloudinary({
-    cloudinary: cloudinary
-});
-var cloudinaryUpload = multer({
-    storage: cloudinaryStorage
-});
 //router.put('/me', cloudinaryUpload.fields([{name: 'cover', maxCount:1}]));
 app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(express.static(__dirname + '/public/uploads'));
-// var storage = multer.diskStorage({
-//     destination: function(req, file, cb) {
-//         cb(null, __dirname + '/public/uploads')
-//     },
-//     filename: function(req, file, cb) {
-//         cb(null, Date.now() + file.originalname)
-//     }
-// })
+
+var storage = multer.memoryStorage({
+    filename: function(req, file, cb) {
+        cb(null, Date.now() + file.originalname)
+    }
+})
 
 var upload = multer({
     storage: storage
@@ -65,7 +55,13 @@ app.use(bodyParser.urlencoded({
 }))
 app.use(bodyParser.json())
 app.use(express.static("public"))
-
+cloudinary.config({
+    cloud_name: 'ppmakeitcount',
+    api_key: '195835998171227',
+    api_secret: '2kbxGdgLjOxBnDoDOGY_Qyw-iqs'
+});
+app.locals.api_key = cloudinary.config().api_key;
+app.locals.cloud_name = cloudinary.config().cloud_name;
 
 app.use(function(req, res, next) {
     res.locals.login = req.isAuthenticated();
@@ -137,75 +133,92 @@ var cpUpload = upload.fields([{
     name: 'pjImg2',
     maxCount: 1
 }])
-app.post('/add/details', cloudinaryUpload.fields([{
-    name: 'cover',
-    maxCount: 1
-}]), function(req, res) {
+app.post('/add/details', cpUpload, function(req, res) {
     var data = req.body;
+    var propicURL, img1URL, img2URL;
+    var newObj = {};
+    var dUri = new Datauri();
 
-    cloudinary.uploader.upload(req.files.propic[0], function(result) {
-        console.log(result)
+    dUri.format(path.extname(req.files.propic[0].originalname).toString(), req.files.propic[0].buffer);
+    cloudinary.uploader.upload(dUri.content, function(result) {
+        propicURL = result.url;
+
+        dUri.format(path.extname(req.files.pjImg1[0].originalname).toString(), req.files.pjImg1[0].buffer);
+        cloudinary.uploader.upload(dUri.content, function(result) {
+            img1URL = result.url;
+            dUri.format(path.extname(req.files.pjImg2[0].originalname).toString(), req.files.pjImg2[0].buffer);
+            cloudinary.uploader.upload(dUri.content, function(result) {
+                img2URL = result.url;
+
+
+                newObj = {
+                    "name": data.name,
+                    "email": data.email,
+                    "about": data.about,
+                    "skills": data.skills,
+                    "linkedin": data.linkedin,
+                    "github": data.github,
+                    "facebook": data.facebook,
+                    "twitter": data.twitter,
+                    "experiance": data.experiance,
+                    "achievements": data.achievements,
+                    "academics": data.academics,
+                    "extra": data.extra,
+                    "propic": propicURL,
+                    "projects": [{
+                        "pjName": data.pjName1,
+                        "pjDetails": data.pjDetails1,
+                        "pjImg": img1URL,
+                        "pjLink": data.pjLink1
+                    }, {
+                        "pjName": data.pjName2,
+                        "pjDetails": data.pjDetails2,
+                        "pjImg": img2URL,
+                        "pjLink": data.pjLink2
+                    }]
+                }
+
+
+                // Bulb.findOne({
+                //     'user_id': '953'
+                // }, function(err, doc) {
+                //     if (err) console.log(err);
+                //     if (doc) {
+                //         doc.profile = newObj;
+                //         doc.save(function(err, doc) {
+                //             if (doc) {
+                //                 res.render('main', {
+                //                     done: true
+                //                 })
+                //             }
+                //
+                //         });
+                //
+                //     } else {
+                //         var bulb = new Bulb();
+                //         bulb.user_id = '953';
+                //         bulb.profile = newObj;
+                //
+                //         bulb.save(function() {
+                //             res.render('main', {
+                //                 done: true
+                //             })
+                //         })
+                //
+                //     }
+                // })
+
+                res.send(newObj)
+            });
+        });
     });
-    var newObj = {
-        "name": data.name,
-        "email": data.email,
-        "about": data.about,
-        "skills": data.skills,
-        "linkedin": data.linkedin,
-        "github": data.github,
-        "facebook": data.facebook,
-        "twitter": data.twitter,
-        "experiance": data.experiance,
-        "achievements": data.achievements,
-        "academics": data.academics,
-        "extra": data.extra,
-        "propic": req.files.propic[0].filename,
-        "projects": [{
-            "pjName": data.pjName1,
-            "pjDetails": data.pjDetails1,
-            "pjImg": req.files.pjImg1[0].filename,
-            "pjLink": data.pjLink1
-        }, {
-            "pjName": data.pjName2,
-            "pjDetails": data.pjDetails2,
-            "pjImg": req.files.pjImg2[0].filename,
-            "pjLink": data.pjLink2
-        }]
-    }
 
     // if (!res.locals.login) {
     //     console.log("checkin auth");
     //     res.send('you are not loged in');
     // }
 
-    Bulb.findOne({
-        'user_id': req.user._id
-    }, function(err, doc) {
-        if (err) console.log(err);
-        if (doc) {
-            doc.profile = newObj;
-            doc.save(function(err, doc) {
-                if (doc) {
-                    res.render('main', {
-                        done: true
-                    })
-                }
 
-            });
-
-        } else {
-            var bulb = new Bulb();
-            bulb.user_id = req.user._id;
-            bulb.profile = newObj;
-
-            bulb.save(function() {
-                res.render('main', {
-                    done: true
-                })
-            })
-
-        }
-    })
 
 });
 
