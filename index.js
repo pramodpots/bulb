@@ -139,6 +139,12 @@ app.post('/add/details', cpUpload, function(req, res) {
     var newObj = {};
     var dUri = new Datauri();
 
+    if (!res.locals.login) {
+        console.log("checkin auth");
+        res.render('main')
+    }
+
+
     dUri.format(path.extname(req.files.propic[0].originalname).toString(), req.files.propic[0].buffer);
     cloudinary.uploader.upload(dUri.content, function(result) {
         propicURL = result.url;
@@ -179,47 +185,39 @@ app.post('/add/details', cpUpload, function(req, res) {
                 }
 
 
-                // Bulb.findOne({
-                //     'user_id': '953'
-                // }, function(err, doc) {
-                //     if (err) console.log(err);
-                //     if (doc) {
-                //         doc.profile = newObj;
-                //         doc.save(function(err, doc) {
-                //             if (doc) {
-                //                 res.render('main', {
-                //                     done: true
-                //                 })
-                //             }
-                //
-                //         });
-                //
-                //     } else {
-                //         var bulb = new Bulb();
-                //         bulb.user_id = '953';
-                //         bulb.profile = newObj;
-                //
-                //         bulb.save(function() {
-                //             res.render('main', {
-                //                 done: true
-                //             })
-                //         })
-                //
-                //     }
-                // })
+                Bulb.findOne({
+                    'user_id': req.user._id
+                }, function(err, doc) {
+                    if (err) console.log(err);
+                    if (doc) {
+                        doc.profile = newObj;
+                        doc.save(function(err, doc) {
+                            if (doc) {
+                                res.render('main', {
+                                    done: true
+                                })
+                            }
 
-                res.send(newObj)
+                        });
+
+                    } else {
+                        var bulb = new Bulb();
+                        bulb.user_id = req.user._id
+                        bulb.profile = newObj;
+
+                        bulb.save(function() {
+                            res.render('main', {
+                                done: true
+                            })
+                        })
+
+                    }
+                })
+
+                //res.send(newObj)
             });
         });
     });
-
-    // if (!res.locals.login) {
-    //     console.log("checkin auth");
-    //     res.send('you are not loged in');
-    // }
-
-
-
 });
 
 app.listen(process.env.PORT || 3000, function() {
