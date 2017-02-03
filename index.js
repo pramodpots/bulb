@@ -85,7 +85,7 @@ app.get('/', function(req, res) {
         "user": req.user
     })
 })
-app.get('/user/details', function(req, res) {
+app.get('/userdetails', function(req, res) {
     User.find({}, function(err, doc) {
         res.send(doc);
     })
