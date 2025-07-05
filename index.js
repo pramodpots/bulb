@@ -75,7 +75,7 @@ app.use(function(req, res, next) {
     res.locals.session = req.session;
     res.locals.login = req.isAuthenticated();
     res.locals.user = req.user;
-    res.locals.fullUrl = req.get('host') + '/user/';
+    res.locals.fullUrl = req.protocol + '://' + req.get('host') + '/user/';
     next();
 })
 
