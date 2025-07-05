@@ -33,9 +33,9 @@ html
                         small  logout
                     a.btn.btn-lg.btn-danger(href='/profile')  Create Now! 
                     if user.url
-                        h2 Your website is running at: 
+                        h2 Your website is running at:
                         .well.col-sm-6.col-sm-offset-3
-                            small(style="font-size:8px;") #{ user.url }
+                            a(href=user.url target='_blank' style="font-size:8px;") #{ user.url }
                 else
                     p.text-danger To create website you should be logged in!
                     br
